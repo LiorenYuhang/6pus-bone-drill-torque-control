@@ -1,0 +1,3 @@
+[INFO] [1793854978.461961058] [imu_drift_platform]: H30 driver configured for /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B029000-if00 at 460800 baud
+[INFO] [1793854978.464328535] [imu_drift_platform]: Opened H30 serial port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B029000-if00
+[INFO] [1793855038.574751218] [rclcpp]: signal_handler(SIGINT/SIGTERM)

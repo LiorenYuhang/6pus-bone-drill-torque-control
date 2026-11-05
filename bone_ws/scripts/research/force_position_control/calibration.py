@@ -13,6 +13,23 @@ HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[3]
 
 
+def validate_relative_start_reference(config,actual_raw):
+    """Reject a mismatched relative reference before any Servo/motion writes.
+
+    Use the existing experiment's force range, not a date-based expiry or an
+    invented calibration. Never automatically erase load or change PID gains.
+    """
+    cal=config.get('calibration',{})
+    if cal.get('kind')!='relative_tare':return None
+    delta=[(v-z)*s for v,z,s in zip(actual_raw,cal['raw_zero'],cal['relative_scale'])]
+    limits=config['controller']['force_limit_relative']
+    if len(delta)!=6 or any(not math.isfinite(v) or abs(v)>limit for v,limit in zip(delta,limits)):
+        raise ValueError('saved relative force reference does not match current initial load: '
+            f'offsets={delta}, existing force range={limits}; explicitly refresh the software relative reference '
+            'with calibration.py --tare (reads only), or verify the intended loaded reference; no automatic re-zero')
+    return dict(initial_offset_relative=delta,force_limit_relative=limits)
+
+
 def relative_config(config,zero,measurement):
     """Define a relative reference; no claim of zero absolute axial load or N."""
     c=dict(config); ctrl=dict(c['controller'])

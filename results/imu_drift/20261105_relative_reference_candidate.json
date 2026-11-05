@@ -1,0 +1,187 @@
+{
+  "port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+  "baudrate": 921600,
+  "period_s": 0.02,
+  "target_max_age_s": 0.2,
+  "feedback_max_age_s": 0.2,
+  "imu_max_age_s": 0.2,
+  "startup_timeout_s": 5.0,
+  "max_start_delta_steps": null,
+  "max_cycle_delta_steps": null,
+  "calibration": {
+    "kind": "relative_tare",
+    "raw_zero": [
+      -362.30576441102755,
+      -0.08771929824561403,
+      128.47869674185463,
+      749,
+      -399.89974937343356,
+      -64.3358395989975
+    ],
+    "relative_scale": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "absolute_force_calibrated": false,
+    "measurement": {
+      "reference": "user-defined static horizontal loaded reference, not absolute zero force",
+      "captured_at": "2026-11-05 13:03:07 +0800",
+      "samples_per_axis": [
+        399,
+        399,
+        399,
+        399,
+        399,
+        399
+      ],
+      "duration_s": 8.01391887400132,
+      "raw_std": [
+        4.456612541268769,
+        0.732232868586288,
+        9.897668002387134,
+        0.0,
+        2.535952004428568,
+        3.215328845280693
+      ],
+      "raw_min": [
+        -377,
+        -11,
+        100,
+        749,
+        -416,
+        -65
+      ],
+      "raw_max": [
+        -360,
+        0,
+        133,
+        749,
+        -399,
+        -43
+      ],
+      "position_min_steps": [
+        1000,
+        997,
+        1000,
+        1000,
+        998,
+        999
+      ],
+      "position_max_steps": [
+        1000,
+        999,
+        1000,
+        1000,
+        998,
+        1001
+      ],
+      "register_write_count": 0,
+      "data_dir": "/home/lyapunov/6pus_bone_drill_torque_control/results/force_position/zero_20261105-130259"
+    }
+  },
+  "controller": {
+    "kp": [
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283
+    ],
+    "ki": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kd": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "correction_limit_m": null,
+    "correction_rate_m_s": [
+      0.017,
+      0.017,
+      0.017,
+      0.017,
+      0.017,
+      0.017
+    ],
+    "max_dt_s": 0.2,
+    "max_age_s": 0.2,
+    "force_limit_relative": [
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641
+    ],
+    "admittance_m_per_relative_s": [
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08
+    ],
+    "force_unit": "relative_raw"
+  },
+  "shaper": {
+    "max_speed_m_per_sec": 0.017,
+    "max_accel_m_per_sec2": null,
+    "max_jerk_m_per_sec3": null,
+    "enabled": false
+  },
+  "imu": {
+    "base_reference": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "platform_reference": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "kp": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "ki": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kd": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "residual_limit_rad": [
+      0.02,
+      0.02,
+      0.02
+    ],
+    "integral_limit_rad_s": [
+      0.02,
+      0.02,
+      0.02
+    ],
+    "shaper": {},
+    "max_dt_s": 0.1
+  }
+}

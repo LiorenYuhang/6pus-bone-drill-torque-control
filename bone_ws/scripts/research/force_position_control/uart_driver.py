@@ -35,7 +35,7 @@ class SixAxisPositionDrive:
         validate_status_feedback(result,motor.motor_id)
         return result
 
-    def initialize(self, *, active=False, select_servo=False):
+    def initialize(self, *, active=False, select_servo=False, initial_feedback_validator=None):
         snapshot=self.read()
         self.anchor=[s.current_position for s in snapshot['status']]
         self.previous=self.anchor[:]
@@ -47,6 +47,7 @@ class SixAxisPositionDrive:
             raise ValueError('initial position outside drive limits')
         self.event('drive_initial',{'positions_steps':self.anchor,'modes':self.modes,
                                   'lower_steps':self.lower,'upper_steps':self.upper})
+        if initial_feedback_validator is not None:initial_feedback_validator(snapshot)
         if active:
             if any(mode not in (0,1) for mode in self.modes):
                 raise ValueError('active drive is in a non-position mode')

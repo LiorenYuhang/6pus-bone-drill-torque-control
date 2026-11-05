@@ -1,0 +1,3 @@
+[INFO] [1793854286.010921523] [force_position_platform_imu]: H30 driver configured for /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B029000-if00 at 460800 baud
+[INFO] [1793854286.013224844] [force_position_platform_imu]: Opened H30 serial port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B029000-if00
+[INFO] [1793854300.355546073] [rclcpp]: signal_handler(SIGINT/SIGTERM)

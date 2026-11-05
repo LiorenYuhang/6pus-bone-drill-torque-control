@@ -29,6 +29,7 @@ from pus6_research_msgs.msg import RawForceFeedback, ForceFeedback
 from pus6_motor_driver.uart_bus import UartBus
 from imu_node import ImuResearchNode
 from controller import Config
+from calibration import validate_relative_start_reference
 from ros_node import ForcePositionNode
 from uart_driver import SixAxisPositionDrive
 
@@ -143,7 +144,12 @@ class UartNode(Node):
             self.drive=SixAxisPositionDrive(self.bus,max_start_delta_steps=self.config['max_start_delta_steps'],
                 max_cycle_delta_steps=self.config['max_cycle_delta_steps'],event=self.log.record,
                 max_speed_m_s=self.config['shaper']['max_speed_m_per_sec'])
-            snapshot=self.drive.initialize(active=self.active,select_servo=self.select_servo)
+            def validate_reference(snapshot):
+                if self.active and not self.hold:
+                    checked=validate_relative_start_reference(self.config,[s.force_g for s in snapshot['status']])
+                    if checked is not None:self.log.record('relative_reference_checked',checked)
+            snapshot=self.drive.initialize(active=self.active,select_servo=self.select_servo,
+                                           initial_feedback_validator=validate_reference)
             self.initial=self.drive.positions_m(snapshot)
             started=time.monotonic_ns()
             period=self.config['period_s']
@@ -239,13 +245,14 @@ def main(argv=None):
     try:
         imu=ImuResearchNode([Parameter('enabled',value=True),Parameter('config_json',value=json.dumps(c['imu'])),
             Parameter('period_s',value=c['period_s']),Parameter('imu_max_age_s',value=c['imu_max_age_s']),
-            Parameter('startup_timeout_s',value=c['startup_timeout_s']),Parameter('reference_mode',value='first_valid'),
+            Parameter('startup_timeout_s',value=c['startup_timeout_s']),Parameter('reference_mode',value=c.get('imu_reference_mode','stationary')),
             Parameter('publish_unshaped_ik',value=True)],cli_args=['--ros-args',
                 '-r','/research_force_torque_mock/desired_lengths_m:=/force_position/ik_lengths_m',
                 '-r','/research_imu_lengths/base_imu:=/force_position/base_imu',
                 '-r','/research_imu_lengths/platform_imu:=/force_position/platform_imu',
                 '-r','/research_imu_lengths/diagnostics:=/force_position/attitude'])
         nodes.append(imu)
+        imu.sample_observer=lambda role,data:log.record('imu_'+role,data)
         uart=UartNode(c,log,active=args.active,hold_current=args.hold_current,select_servo=args.select_servo)
         nodes.append(uart)
         if args.active and not args.hold_current:

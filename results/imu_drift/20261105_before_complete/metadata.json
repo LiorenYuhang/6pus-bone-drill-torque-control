@@ -1,0 +1,18 @@
+{
+  "hardware_write_count": 0,
+  "motor_serial_opened": false,
+  "ports": {
+    "base": "/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B32028000-if00",
+    "platform": "/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B029000-if00"
+  },
+  "reference_mode": "first_valid",
+  "counts": {
+    "base": 11985,
+    "platform": 11988
+  },
+  "duration_s": 60.35319383699971,
+  "reason": "duration_complete",
+  "attitude_fault": null,
+  "timestamp_note": "Header is H30 host publish time, not a device sample clock",
+  "stationary_condition": "operator confirmed both sensors fixed; validate with gyro/acceleration"
+}

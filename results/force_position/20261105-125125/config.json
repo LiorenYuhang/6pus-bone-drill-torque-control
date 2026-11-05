@@ -1,0 +1,265 @@
+{
+  "port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+  "baudrate": 921600,
+  "period_s": 0.02,
+  "target_max_age_s": 0.2,
+  "feedback_max_age_s": 0.2,
+  "imu_max_age_s": 0.2,
+  "startup_timeout_s": 5.0,
+  "max_start_delta_steps": null,
+  "max_cycle_delta_steps": null,
+  "calibration": {
+    "kind": "relative_tare",
+    "raw_zero": [
+      3520.0676691729323,
+      -277.9949874686717,
+      -6214.275689223057,
+      672,
+      -1125.2255639097743,
+      -6885.784461152883
+    ],
+    "relative_scale": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "absolute_force_calibrated": false,
+    "measurement": {
+      "reference": "user-defined static horizontal loaded reference, not absolute zero force",
+      "captured_at": "2026-10-31 18:08:40 +0800",
+      "samples_per_axis": [
+        399,
+        399,
+        399,
+        399,
+        399,
+        399
+      ],
+      "duration_s": 8.021442011988256,
+      "raw_std": [
+        5.908061891951106,
+        5.4950399085297095,
+        7.612757098467006,
+        0.0,
+        1.2562617578799136,
+        2.6901210057232103
+      ],
+      "raw_min": [
+        3514,
+        -280,
+        -6242,
+        672,
+        -1139,
+        -6906
+      ],
+      "raw_max": [
+        3531,
+        -250,
+        -6210,
+        672,
+        -1125,
+        -6885
+      ],
+      "position_min_steps": [
+        999,
+        997,
+        998,
+        1000,
+        998,
+        998
+      ],
+      "position_max_steps": [
+        1000,
+        999,
+        999,
+        1001,
+        999,
+        999
+      ],
+      "register_write_count": 0,
+      "data_dir": "/home/lyapunov/6pus_bone_drill_torque_control/results/force_position/zero_20261031-180832"
+    }
+  },
+  "controller": {
+    "kp": [
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283,
+      10197.162129779283
+    ],
+    "ki": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kd": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "correction_limit_m": null,
+    "correction_rate_m_s": [
+      0.017,
+      0.017,
+      0.017,
+      0.017,
+      0.017,
+      0.017
+    ],
+    "max_dt_s": 0.2,
+    "max_age_s": 0.2,
+    "force_limit_relative": [
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641,
+      50.98581064889641
+    ],
+    "admittance_m_per_relative_s": [
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08,
+      4.9033250000000007e-08
+    ],
+    "force_unit": "relative_raw"
+  },
+  "shaper": {
+    "max_speed_m_per_sec": 0.017,
+    "max_accel_m_per_sec2": null,
+    "max_jerk_m_per_sec3": null,
+    "enabled": false
+  },
+  "imu": {
+    "base_reference": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "platform_reference": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "kp": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "ki": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kd": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "residual_limit_rad": [
+      0.02,
+      0.02,
+      0.02
+    ],
+    "integral_limit_rad_s": [
+      0.02,
+      0.02,
+      0.02
+    ],
+    "shaper": {},
+    "max_dt_s": 0.1
+  },
+  "control_config": {
+    "controller": {
+      "kp": [
+        10197.162129779283,
+        10197.162129779283,
+        10197.162129779283,
+        10197.162129779283,
+        10197.162129779283,
+        10197.162129779283
+      ],
+      "ki": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "kd": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "correction_limit_m": null,
+      "correction_rate_m_s": [
+        0.017,
+        0.017,
+        0.017,
+        0.017,
+        0.017,
+        0.017
+      ],
+      "max_dt_s": 0.2,
+      "max_age_s": 0.2,
+      "force_limit_relative": [
+        50.98581064889641,
+        50.98581064889641,
+        50.98581064889641,
+        50.98581064889641,
+        50.98581064889641,
+        50.98581064889641
+      ],
+      "admittance_m_per_relative_s": [
+        4.9033250000000007e-08,
+        4.9033250000000007e-08,
+        4.9033250000000007e-08,
+        4.9033250000000007e-08,
+        4.9033250000000007e-08,
+        4.9033250000000007e-08
+      ],
+      "force_unit": "relative_raw",
+      "raw_zero": [
+        3520.0676691729323,
+        -277.9949874686717,
+        -6214.275689223057,
+        672,
+        -1125.2255639097743,
+        -6885.784461152883
+      ],
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shaper": {
+      "max_speed_m_per_sec": 0.017,
+      "max_accel_m_per_sec2": null,
+      "max_jerk_m_per_sec3": null,
+      "enabled": false
+    }
+  }
+}

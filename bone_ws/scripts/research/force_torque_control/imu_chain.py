@@ -12,6 +12,7 @@ from j11_m2_pid_residual_runner import (M2TaskSpaceAttitudePid, M2PidGains, M2Pi
     compute_so3_platform_error, compose_so3_pid_residual)
 from pus6_kinematics.analytical_6pus import Analytical6PusKinematics
 from pus6_control.joint_trajectory_controller import StatefulJerkLimitedShaper
+from j9_1_platform_imu_recorder import average_quat_xyzw
 
 
 def quat(q):
@@ -19,6 +20,54 @@ def quat(q):
     if q.shape != (4,) or not np.all(np.isfinite(q)) or np.linalg.norm(q)<1e-8:
         raise ValueError('invalid IMU quaternion')
     return tuple(q/np.linalg.norm(q))
+
+
+class StationaryImuReference:
+    """One fixed operating reference, using Position's quaternion averaging.
+
+    This does not calibrate hardware gyro bias, integrate gyro, or continuously
+    subtract posture drift. Both sensors must supply unique stationary samples.
+    """
+    def __init__(self,duration_s=1.,min_samples=50,max_gyro_rad_s=.05,max_quat_std=.002):
+        from collections import deque
+        if duration_s<=0 or min_samples<2 or max_gyro_rad_s<=0 or max_quat_std<=0:
+            raise ValueError('invalid stationary reference settings')
+        self.duration_s=duration_s;self.min_samples=min_samples
+        self.max_gyro=max_gyro_rad_s;self.max_std=max_quat_std
+        self.samples={role:deque(maxlen=512) for role in ('base','platform')}
+        self.reason='waiting for both sensors'
+
+    def add(self,role,q,gyro,stamp_ns):
+        samples=self.samples[role]
+        if samples and stamp_ns<=samples[-1][0]:return
+        if gyro is None:return
+        gyro=np.asarray(gyro,dtype=float)
+        if gyro.shape!=(3,) or not np.isfinite(gyro).all():raise ValueError('invalid gyro during reference capture')
+        samples.append((stamp_ns,quat(q),gyro))
+
+    def capture(self):
+        if not all(self.samples.values()):return None
+        end=min(rows[-1][0] for rows in self.samples.values())
+        begin=end-int(self.duration_s*1e9)
+        result={}
+        for role,rows in self.samples.items():
+            # Include one preceding sample so window length is observable.
+            chosen=[r for r in rows if r[0]>=begin]
+            prior=[r for r in rows if r[0]<begin]
+            if prior:chosen.insert(0,prior[-1])
+            chosen=[r for r in chosen if r[0]<=end]
+            if len(chosen)<self.min_samples or (chosen[-1][0]-chosen[0][0])*1e-9<self.duration_s:
+                self.reason=f'{role}: collecting unique one-second samples';return None
+            q=np.asarray([r[1] for r in chosen]);q=np.where((q@q[0])[:,None]<0,-q,q)
+            gyro=np.asarray([r[2] for r in chosen])
+            maximum=float(np.linalg.norm(gyro,axis=1).max());std=float(np.std(q,axis=0).max())
+            if maximum>self.max_gyro or std>self.max_std:
+                self.reason=f'{role}: moving/unstable reference (gyro={maximum:.6g}, quaternion_std={std:.6g})';return None
+            result[role]=dict(q_xyzw=list(average_quat_xyzw(q)),samples=len(q),
+                gyro_mean_rad_s=gyro.mean(axis=0).tolist(),max_gyro_rad_s=maximum,quaternion_std=std,
+                first_header_ns=chosen[0][0],last_header_ns=chosen[-1][0])
+        self.reason='stationary reference captured'
+        return result
 
 
 class ImuToLengths:

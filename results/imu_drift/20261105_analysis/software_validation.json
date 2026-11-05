@@ -1,0 +1,13 @@
+{
+  "hardware_write_count": 0,
+  "tests_passed": 43,
+  "test_groups": {
+    "force_position_reference_driver_shutdown": 32,
+    "imu_chain_integration": 11
+  },
+  "python_compilation": "passed",
+  "cpp_or_ros_interfaces_changed": false,
+  "motor_closed_loop_validation": "NOT_RUN",
+  "imu_hardware_stationary_validation": "two independent 60-second real recordings",
+  "force_reference_capture": "8.014 seconds real status reads, register_write_count=0"
+}

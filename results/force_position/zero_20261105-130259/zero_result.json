@@ -1,0 +1,63 @@
+{
+  "raw_zero": [
+    -362.30576441102755,
+    -0.08771929824561403,
+    128.47869674185463,
+    749,
+    -399.89974937343356,
+    -64.3358395989975
+  ],
+  "reference": "user-defined static horizontal loaded reference, not absolute zero force",
+  "captured_at": "2026-11-05 13:03:07 +0800",
+  "samples_per_axis": [
+    399,
+    399,
+    399,
+    399,
+    399,
+    399
+  ],
+  "duration_s": 8.01391887400132,
+  "raw_std": [
+    4.456612541268769,
+    0.732232868586288,
+    9.897668002387134,
+    0.0,
+    2.535952004428568,
+    3.215328845280693
+  ],
+  "raw_min": [
+    -377,
+    -11,
+    100,
+    749,
+    -416,
+    -65
+  ],
+  "raw_max": [
+    -360,
+    0,
+    133,
+    749,
+    -399,
+    -43
+  ],
+  "position_min_steps": [
+    1000,
+    997,
+    1000,
+    1000,
+    998,
+    999
+  ],
+  "position_max_steps": [
+    1000,
+    999,
+    1000,
+    1000,
+    998,
+    1001
+  ],
+  "register_write_count": 0,
+  "data_dir": "/home/lyapunov/6pus_bone_drill_torque_control/results/force_position/zero_20261105-130259"
+}

@@ -11,12 +11,12 @@
   "calibration": {
     "kind": "relative_tare",
     "raw_zero": [
-      3520.0676691729323,
-      -277.9949874686717,
-      -6214.275689223057,
-      672,
-      -1125.2255639097743,
-      -6885.784461152883
+      -362.30576441102755,
+      -0.08771929824561403,
+      128.47869674185463,
+      749,
+      -399.89974937343356,
+      -64.3358395989975
     ],
     "relative_scale": [
       1.0,
@@ -29,7 +29,7 @@
     "absolute_force_calibrated": false,
     "measurement": {
       "reference": "user-defined static horizontal loaded reference, not absolute zero force",
-      "captured_at": "2026-10-31 18:08:40 +0800",
+      "captured_at": "2026-11-05 13:03:07 +0800",
       "samples_per_axis": [
         399,
         399,
@@ -38,49 +38,50 @@
         399,
         399
       ],
-      "duration_s": 8.021442011988256,
+      "duration_s": 8.01391887400132,
       "raw_std": [
-        5.908061891951106,
-        5.4950399085297095,
-        7.612757098467006,
+        4.456612541268769,
+        0.732232868586288,
+        9.897668002387134,
         0.0,
-        1.2562617578799136,
-        2.6901210057232103
+        2.535952004428568,
+        3.215328845280693
       ],
       "raw_min": [
-        3514,
-        -280,
-        -6242,
-        672,
-        -1139,
-        -6906
+        -377,
+        -11,
+        100,
+        749,
+        -416,
+        -65
       ],
       "raw_max": [
-        3531,
-        -250,
-        -6210,
-        672,
-        -1125,
-        -6885
+        -360,
+        0,
+        133,
+        749,
+        -399,
+        -43
       ],
       "position_min_steps": [
-        999,
+        1000,
         997,
-        998,
+        1000,
         1000,
         998,
-        998
+        999
       ],
       "position_max_steps": [
         1000,
         999,
-        999,
-        1001,
-        999,
-        999
+        1000,
+        1000,
+        998,
+        1001
       ],
       "register_write_count": 0,
-      "data_dir": "/home/lyapunov/6pus_bone_drill_torque_control/results/force_position/zero_20261031-180832"
+      "data_dir": "/home/lyapunov/6pus_bone_drill_torque_control/results/force_position/zero_20261105-130259",
+      "purpose": "Explicit read-only software relative force reference refresh after diagnosing 20261105-125125 drift; no hardware Tare"
     }
   },
   "controller": {
@@ -190,5 +191,6 @@
     ],
     "shaper": {},
     "max_dt_s": 0.1
-  }
+  },
+  "imu_reference_mode": "stationary"
 }
